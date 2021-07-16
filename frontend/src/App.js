@@ -1,12 +1,12 @@
 import './public/css/App.css';
 import Main from './routes';
 
-function App() {
+const App = () => {
 	return (
 		<div className='App'>
 			<Main />
 		</div>
 	);
-}
+};
 
 export default App;
