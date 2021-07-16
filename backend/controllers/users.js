@@ -59,15 +59,11 @@ const userProfile = asyncHandler(async (req, res) => {
 // Get all users
 const getUsers = asyncHandler(async (req, res, next) => {
 	const user = await User.find({});
-	const registeredUsers = await User.find({ isRegisted: true }).countDocuments();
-	const activeUsers = await User.find({ isActive: true }).countDocuments();
 	if (user) {
 		res.status(200).json({
 			users: user,
 			success: true,
-			total: user.length,
-			registeredUsers,
-			activeUsers
+			total: user.length
 		});
 	} else {
 		res.status(404);
