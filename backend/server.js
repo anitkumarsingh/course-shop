@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-
+import coursesRouter from './routes/courses.js';
 import usersRouter from './routes/users.js';
 import dotenv from 'dotenv';
 import connectDB from './config/index.js';
@@ -16,6 +16,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/courses', coursesRouter);
 
 const __dirname = path.resolve();
 

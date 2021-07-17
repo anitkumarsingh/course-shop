@@ -870,6 +870,10 @@ img {
 	.footer__container {
 		grid-template-columns: repeat(3, 1fr);
 	}
+	.login__container,
+	.register__container {
+		grid-template-columns: repeat(2, 1fr);
+	}
 	.qualification__sections {
 		display: grid;
 		grid-template-columns: 0.6fr;

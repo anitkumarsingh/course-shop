@@ -1,7 +1,6 @@
 import Users from '../models/users.js';
 import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
-import User from '../models/users.js';
 
 const authUser = asyncHandler(async (req, res, next) => {
 	const { email, password } = req.body;
@@ -44,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // user profile
 const userProfile = asyncHandler(async (req, res) => {
-	const user = await User.findById(req.user._id);
+	const user = await Users.findById(req.user._id);
 	if (user) {
 		res.json({
 			id: user._id,
@@ -58,7 +57,7 @@ const userProfile = asyncHandler(async (req, res) => {
 
 // Get all users
 const getUsers = asyncHandler(async (req, res, next) => {
-	const user = await User.find({});
+	const user = await Users.find({});
 	if (user) {
 		res.status(200).json({
 			users: user,
