@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Card = ({ courses }) => {
 	return (
@@ -11,24 +12,26 @@ const Card = ({ courses }) => {
 					courses.map((course) => {
 						return (
 							<div className='portfolio__content2' key={course.id}>
-								<a href='#/'>
+								<Link to={`/course/${course._id}`}>
 									<img
 										src={course.thumbnailURL}
 										alt={course.title}
 										className='portfolio__img2'
 									/>
-								</a>
+								</Link>
 								<div className='portfolio__data2'>
 									<span className='portfolio__subtitle2'>
 										<i className='uil uil-rupee-sign'></i>
 										{course.price}
 									</span>
-									<a href='#/'>
+									<Link to={`/course/${course._id}`}>
 										<h2 className='portfolio__title2'>{course.title}</h2>
-									</a>
-									<a className='button button-link button--flex' href='/#'>
+									</Link>
+									<Link
+										to={`/course/${course._id}`}
+										className='button button-link button--flex'>
 										<i className='uil uil-shopping-cart'></i> Buy Now
-									</a>
+									</Link>
 								</div>
 							</div>
 						);

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
-import { BASE_URL } from '../../constant';
+import { API_BASE_URL } from '../../constant';
 
 const Home = () => {
 	const [courses, setCourses] = useState([]);
 
 	const fetchCourses = async () => {
-		const res = await fetch(`${BASE_URL}`);
+		const res = await fetch(`${API_BASE_URL}/courses`);
 		const result = await res.json();
-		setCourses(result);
+		setCourses(result.courses);
 	};
 	useEffect(() => {
 		fetchCourses();
