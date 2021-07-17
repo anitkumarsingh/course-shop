@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	useEffect(() => {
@@ -86,28 +87,28 @@ const Header = () => {
 		<>
 			<header className='header' id='header'>
 				<nav className='nav container'>
-					<a href='#/' className='nav__logo'>
+					<Link to='/' className='nav__logo'>
 						Anit Kumar
-					</a>
+					</Link>
 					<div className='nav__menu' id='nav-menu'>
 						<ul className='nav__list grid'>
 							<li className='nav__item'>
-								<a href='#home' className='nav__link active-link'>
+								<Link to='/' className='nav__link active-link'>
 									<i className='uil uil-estate nav__icon' />
 									Home
-								</a>
+								</Link>
 							</li>
 							<li className='nav__item'>
-								<a href='#about' className='nav__link'>
+								<Link to='/login' className='nav__link'>
 									<i className='uil uil-user nav__icon' />
 									Login
-								</a>
+								</Link>
 							</li>
 							<li className='nav__item'>
-								<a href='#skills' className='nav__link'>
+								<Link to='/register' className='nav__link'>
 									<i className='uil uil-file-alt nav__icon' />
 									Register
-								</a>
+								</Link>
 							</li>
 						</ul>
 						<i className='uil uil-times nav__close' id='nav-close' />

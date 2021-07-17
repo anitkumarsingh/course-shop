@@ -4,6 +4,8 @@ import Cart from '../pages/Cart';
 import Home from '../pages/Home';
 import Header from '../components/Block/Header';
 import Footer from '../components/Block/Footer';
+import Login from '../components/Forms/Login';
+import Register from '../components/Forms/Register';
 
 const Main = () => {
 	return (
@@ -13,6 +15,8 @@ const Main = () => {
 				<Switch>
 					<Route path='/' exact component={Home} />
 					<Route path='/cart' component={Cart} />
+					<Route path='/login' component={Login} />
+					<Route path='/register' component={Register} />
 				</Switch>
 			</div>
 			<Footer />
