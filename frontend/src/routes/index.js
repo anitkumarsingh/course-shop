@@ -7,23 +7,25 @@ import Footer from '../components/Block/Footer';
 import Login from '../components/Forms/Login';
 import Register from '../components/Forms/Register';
 import Course from '../pages/Course';
+import Payment from '../components/Forms/payment';
 
 const Main = () => {
-	return (
-		<>
-			<Header />
-			<div className='main'>
-				<Switch>
-					<Route path='/' exact component={Home} />
-					<Route path='/cart' component={Cart} />
-					<Route path='/login' component={Login} />
-					<Route path='/register' component={Register} />
-					<Route path='/course/:id' component={Course} />
-				</Switch>
-			</div>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Header />
+      <div className="main">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/course/:id" component={Course} />
+          <Route path="/payment/:price" component={Payment} />
+        </Switch>
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default Main;

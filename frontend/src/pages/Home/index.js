@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Card from '../../components/Card/Card';
-import { API_BASE_URL } from '../../constant';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourses } from '../../redux/actions/courses';
 
 const Home = () => {
-  const [courses, setCourses] = useState([]);
+  const dispatch = useDispatch();
+  const { courses, loading } = useSelector((state) => state.courses);
 
-  const fetchCourses = async () => {
-    const res = await fetch(`${API_BASE_URL}/courses`);
-    const result = await res.json();
-    setCourses(result.courses);
-  };
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    dispatch(getCourses());
+  }, [dispatch]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <section className="home section" id="home">
