@@ -1002,3 +1002,14 @@ img {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.otp__input {
+  background-color: var(--input-color);
+  width: 100%;
+  color: var(--text-color);
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  border: none;
+  outline: none;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+}

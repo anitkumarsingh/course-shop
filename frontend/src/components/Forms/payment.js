@@ -70,7 +70,7 @@ const Payment = (props) => {
                 onChange={(e) => setCardNo(e.target.value)}
               />
             </div>
-            <div class="contact__inputs grid">
+            <div className="contact__inputs grid">
               <div className="contact__content">
                 <label htmlFor="cardNumber" className="contact__label">
                   Expiring On
