@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import loginImg from '../../public/assets/login.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/actions/users';
+import { Link } from 'react-router-dom';
 
 const Login = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -12,11 +13,13 @@ const Login = ({ location, history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
+
   const redirect = location.search
     ? location.search.split('=')[1]
-    : userInfo?.isAdmin
-    ? '/admin/dashboard'
+    : userInfo
+    ? '/dashboard'
     : '/';
+
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
@@ -33,7 +36,7 @@ const Login = ({ location, history }) => {
       <section className="contact section" id="contact">
         <h2 className="section__title">Login</h2>
         <span className="section__subtitle">Get In Touch</span>
-        <span className="section__subtitle">{error}</span>
+        {error && <span className="section__subtitle">{error}</span>}
         <div className="login__container container grid">
           <div
             style={{
@@ -61,7 +64,7 @@ const Login = ({ location, history }) => {
             </div>
             <div className="contact__content">
               <label htmlFor="email" className="contact__label">
-                Email
+                Email *
               </label>
               <input
                 type="email"
@@ -73,7 +76,7 @@ const Login = ({ location, history }) => {
             </div>
             <div className="contact__content">
               <label htmlFor="password" className="contact__label">
-                Password
+                Password *
               </label>
               <input
                 type="password"
@@ -90,6 +93,14 @@ const Login = ({ location, history }) => {
                 <i className="ui uil message button__icon"></i>
               </a>
             </div>
+            <p>
+              New User?{' '}
+              <Link
+                to={redirect ? `/register?redirect=${redirect}` : '/register'}
+              >
+                Register
+              </Link>
+            </p>
           </form>
         </div>
       </section>

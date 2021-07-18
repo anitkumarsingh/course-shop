@@ -131,12 +131,14 @@ const Header = () => {
                   </Link>
                 )}
               </li>
-              <li className="nav__item">
-                <Link to="/register" className="nav__link">
-                  <i className="uil uil-file-alt nav__icon" />
-                  Register
-                </Link>
-              </li>
+              {!userInfo && (
+                <li className="nav__item">
+                  <Link to="/register" className="nav__link">
+                    <i className="uil uil-file-alt nav__icon" />
+                    Register
+                  </Link>
+                </li>
+              )}
             </ul>
             <i className="uil uil-times nav__close" id="nav-close" />
           </div>
