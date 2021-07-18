@@ -33,16 +33,7 @@ const Modal = ({ modal, setModal }) => {
   return (
     <PureModal
       header="Enter OTP "
-      footer={
-        <>
-          <a
-            className="button button--flex"
-            onClick={() => makePaymentAndPlaceOrder()}
-          >
-            Make Payment Now
-          </a>
-        </>
-      }
+      footer={null}
       isOpen={modal}
       closeButton="close"
       closeButtonPosition="bottom"
@@ -58,6 +49,20 @@ const Modal = ({ modal, setModal }) => {
         value={otp}
         onChange={(e) => setOtp(e.target.value)}
       />
+
+      <div
+        style={{
+          marginTop: '1rem',
+          textAlign: 'center'
+        }}
+      >
+        <a
+          className="button button--flex"
+          onClick={() => makePaymentAndPlaceOrder()}
+        >
+          Make Payment Now
+        </a>
+      </div>
     </PureModal>
   );
 };

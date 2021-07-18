@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import loginImg from '../../public/assets/card.jpg';
+import React, { useState, useEffect } from 'react';
+import loginImg from '../../public/assets/25794-4-credit-card-hd.png';
+import LoaderImg from '../../public/assets/294.svg';
 import Modal from '../Modal';
 
 const Payment = (props) => {
@@ -8,12 +9,24 @@ const Payment = (props) => {
   const [name, setName] = useState('');
   const [cardNo, setCardNo] = useState('');
   const [modal, setModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { price } = props?.match?.params;
 
+  useEffect(() => {
+    const getEmail = JSON.parse(localStorage.getItem('userInfo'));
+    if (getEmail) {
+      console.log('email', getEmail.email);
+      setEmail(getEmail.email);
+    }
+  }, [price]);
+
   const fakeOTPSending = () => {
+    setIsLoading(true);
     setTimeout(() => {
       setModal(true);
-    }, 2000);
+      setIsLoading(false);
+    }, 3000);
   };
   return (
     <>
@@ -99,6 +112,7 @@ const Payment = (props) => {
             <div onClick={() => fakeOTPSending()}>
               <a className="button button--flex">
                 <i className="uil uil-rupee-sign"></i> {price} Pay Now
+                <span>{isLoading && <img src={LoaderImg} alt="loader" />}</span>
               </a>
             </div>
           </form>
