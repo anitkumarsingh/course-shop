@@ -1,13 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/actions/users';
 
 const Header = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    if (userInfo) setIsUserLoggedIn(true);
     /*==================== MENU SHOW Y HIDDEN ====================*/
     const navMenu = document.getElementById('nav-menu'),
       navToggle = document.getElementById('nav-toggle'),
@@ -41,8 +47,13 @@ const Header = () => {
 
     function scrollHeader() {
       const nav = document.getElementById('header');
-      if (this.scrollY >= 80) nav.classList.add('scroll-header');
-      else nav.classList.remove('scroll-header');
+      if (this.scrollY >= 80) {
+        nav.classList.add('scroll-header');
+      } else {
+        if (nav) {
+          nav.classList.remove('scroll-header');
+        }
+      }
     }
     window.addEventListener('scroll', scrollHeader);
 
@@ -92,11 +103,6 @@ const Header = () => {
     });
   }, []);
 
-  const LoggedOut = () => {
-    localStorage.removeItem('userInfo');
-    setIsUserLoggedIn(false);
-  };
-
   return (
     <>
       <header className="header" id="header">
@@ -113,8 +119,8 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav__item">
-                {isUserLoggedIn ? (
-                  <a className="nav__link" onClick={() => LoggedOut()}>
+                {userInfo ? (
+                  <a className="nav__link" onClick={() => logoutHandler()}>
                     <i className="uil uil-user nav__icon" />
                     Logout
                   </a>

@@ -1,41 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { API_BASE_URL } from '../../constant';
+import React, { useState, useEffect } from 'react';
 import loginImg from '../../public/assets/login.png';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/actions/users';
 
-const Login = () => {
+const Login = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [msg, setMsg] = useState('');
 
-  const location = useHistory();
-  const loginHandler = async (e) => {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
+  const redirect = location.search
+    ? location.search.split('=')[1]
+    : userInfo?.isAdmin
+    ? '/admin/dashboard'
+    : '/';
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
+
+  const submitHandler = (e) => {
     e.preventDefault();
-    const loginData = {
-      email,
-      password
-    };
-    try {
-      const request = await fetch(`${API_BASE_URL}/users/login`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginData)
-      });
-      const result = await request.json();
-      const { message } = result;
-      if (message) {
-        setMsg(message);
-      }
-      if (result && !message) {
-        localStorage.setItem('userInfo', JSON.stringify(result));
-        location.push('/');
-      }
-    } catch (error) {}
+    dispatch(login(email, password));
   };
 
   return (
@@ -43,7 +33,7 @@ const Login = () => {
       <section className="contact section" id="contact">
         <h2 className="section__title">Login</h2>
         <span className="section__subtitle">Get In Touch</span>
-        <span className="section__subtitle">{msg && { msg }}</span>
+        <span className="section__subtitle">{error}</span>
         <div className="login__container container grid">
           <div
             style={{
@@ -94,7 +84,7 @@ const Login = () => {
               />
             </div>
 
-            <div onClick={(e) => loginHandler(e)}>
+            <div onClick={(e) => submitHandler(e)}>
               <a className="button button--flex">
                 Login
                 <i className="ui uil message button__icon"></i>
