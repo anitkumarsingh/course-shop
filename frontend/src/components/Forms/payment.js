@@ -16,7 +16,6 @@ const Payment = (props) => {
   useEffect(() => {
     const getEmail = JSON.parse(localStorage.getItem('userInfo'));
     if (getEmail) {
-      console.log('email', getEmail.email);
       setEmail(getEmail.email);
     }
   }, [price]);
@@ -73,7 +72,7 @@ const Payment = (props) => {
 
             <div className="contact__content">
               <label htmlFor="cardNumber" className="contact__label">
-                Card Number
+                Card Number *
               </label>
               <input
                 type="password"
@@ -86,7 +85,7 @@ const Payment = (props) => {
             <div className="contact__inputs grid">
               <div className="contact__content">
                 <label htmlFor="cardNumber" className="contact__label">
-                  Expiring On
+                  Expiring On *
                 </label>
                 <input
                   type="password"
@@ -98,7 +97,7 @@ const Payment = (props) => {
               </div>
               <div className="contact__content">
                 <label htmlFor="cardNumber" className="contact__label">
-                  vcc
+                  vcc *
                 </label>
                 <input
                   type="password"
@@ -112,7 +111,15 @@ const Payment = (props) => {
             <div onClick={() => fakeOTPSending()}>
               <a className="button button--flex">
                 <i className="uil uil-rupee-sign"></i> {price} Pay Now
-                <span>{isLoading && <img src={LoaderImg} alt="loader" />}</span>
+                <span>
+                  {isLoading && (
+                    <img
+                      src={LoaderImg}
+                      alt="loader"
+                      style={{ marginTop: '10px' }}
+                    />
+                  )}
+                </span>
               </a>
             </div>
           </form>

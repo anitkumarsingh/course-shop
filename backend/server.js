@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import coursesRouter from './routes/courses.js';
 import usersRouter from './routes/users.js';
+import orderRouter from './routes/orders.js';
 import dotenv from 'dotenv';
 import connectDB from './config/index.js';
 import { notFound, errorHandler } from './middleware/index.js';
@@ -19,6 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/courses', coursesRouter);
+app.use('/api/v1/orders', orderRouter);
 
 const __dirname = path.resolve();
 

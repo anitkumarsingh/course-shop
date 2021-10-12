@@ -2,7 +2,7 @@ import { actionTypes } from '../actions/actionTypes';
 
 const { COURSE_REQUEST, COURSE_SUCCESS, COURSE_FAIL } = actionTypes;
 
-export const coursesReducers = (state = {}, action) => {
+export const coursesReducer = (state = {}, action) => {
   switch (action.type) {
     case COURSE_REQUEST:
       return { loading: true };
